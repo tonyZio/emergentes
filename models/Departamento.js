@@ -1,5 +1,4 @@
 const departamentoSchema = new mongoose.Schema({
-    ID: Number,
     NombreDepartamento: String,
     DescripciónDepartamento: String,
     FechaCreación: Date
