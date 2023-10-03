@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const HistorialLaboral = require('../models/HistorialLaboral');
-const  hoy = new Date();
 mongoose.connect('mongodb://127.0.0.1:27017/gestionempleados');
 
 const db = mongoose.connection;
@@ -10,51 +9,53 @@ db.once('open', () => {
   console.log('Conexión a MongoDB establecida correctamente.');
 });
 
-  const nuevaEvaluacion = new Empleado({
-  FechaEvaluación: hoy,
-  Calificación: 5,
-  ComentariosObservaciones: 'paso apenas',
+  const nuevoHistorialLaboral = new HistorialLaboral({
+    PuestoTrabajo: 'Ventas',
+    DescripciónFunciones: 'Vende paracetamol',
+    NombreEmpresaAnterior: 'Similares',
+    MotivoSalida: 'Quiere ser cantante'
 });
   
-nuevaEvaluacion.save()
+nuevoHistorialLaboral.save()
     .then(() => {
-      console.log('Evaluación guardada correctamente.');
+      console.log('Historial laboral guardado correctamente.');
     })
     .catch((err) => {
-      console.error('Error al guardar la evaluación:', err);
+      console.error('Error al guardar el historial laboral:', err);
     });
   
-EvaluacionDesempeno.find({})
-    .then((evaluaciones) => {
-      console.log('Evaluacioness encontradas:', evaluaciones);
+HistorialLaboral.find({})
+    .then((historialesLaborales) => {
+      console.log('Historiales laborales encontrados:', historialesLaborales);
     })
     .catch((err) => {
-      console.error('Error al buscar evaluaciones:', err);
+      console.error('Error al buscar historiales laborales:', err);
     });
   
-const evaluacionIdAztualizar = '';
+const historialLaboraIdAztualizado = '';
   
-EvaluacionDesempeno.findByIdAndUpdate(
-    evaluacionIdAztualizar,
-    { FechaEvaluación: "hoy" },
-    { Calificación: "5" },
-    { ComentariosObservaciones: "siempre no paso" }, 
-    { new: true }// Devuelve la evaluación actualizada
+HistorialLaboral.findByIdAndUpdate(
+    historialLaboraIdAztualizado,
+    { PuestoTrabajo: 'Ex cantante' },
+    { DescripciónFunciones: 'Cantaba' },
+    { NombreEmpresaAnterior: 'El bar' }, 
+    { MotivoSalida: 'No canta'},
+    { new: true }// Devuelve el historial laboral actualizado.
     )
-    .then((evaluacionActualizada) => {
-      console.log('Evaluación actualizada:', evaluacionActualizada);
+    .then((historialActualizado) => {
+      console.log('Historial laboral actualizado:', historialActualizado);
     })
     .catch((err) => {
-      console.error('Error al actualizar evluación:', err);
+      console.error('Error al actualizar historial laboral:', err);
     });
   
-const evaluacionIdEliminar = '';
+const historialLaboralIdEliminar = '';
   
-EvaluacionDesempeno.findByIdAndRemove(evaluacionIdEliminar)
+HistorialLaboral.findByIdAndRemove(historialLaboralIdEliminar)
     .then(() => {
-      console.log('Evaluación eliminado correctamente.');
+      console.log('Historial laboral eliminado correctamente.');
     })
     .catch((err) => {
-      console.error('Error al eliminar evaluación:', err);
+      console.error('Error al eliminar historial laboral:', err);
     });
   
