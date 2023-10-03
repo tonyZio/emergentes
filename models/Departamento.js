@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const departamentoSchema = new mongoose.Schema({
     NombreDepartamento: String,
     DescripciónDepartamento: String,
