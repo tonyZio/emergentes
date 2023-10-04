@@ -1,4 +1,4 @@
-const Empleado = require('./ruta-de-tu-modelo-empleado');
+const Empleado = require('../models/Empleado');
 
 // Controlador para crear un nuevo empleado
 exports.createEmpleado = async (req, res) => {
