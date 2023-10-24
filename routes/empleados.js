@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const empleadoController = require('../controllers/empleados');
+const {verifyToken} = require('../middleware');
+const {validateEmpleado} = require('../middleware');
 
 router
     .route('/')
-    .post(empleadoController.createEmpleado)
-    .get(empleadoController.getAllEmpleados)
+    .post(verifyToken,empleadoController.createEmpleado)
+    .get(verifyToken,validateEmpleado,empleadoController.getAllEmpleados)
 
 router
     .route('/:id')
-    .get(empleadoController.getEmpleadoById)
-    .put(empleadoController.updateEmpleado)
-    .delete(empleadoController.deleteEmpleado);
+    .get(verifyToken,empleadoController.getEmpleadoById)
+    .put(verifyToken,validateEmpleado,empleadoController.updateEmpleado)
+    .delete(verifyToken,validateEmpleado,empleadoController.deleteEmpleado);
   
 module.exports = router;

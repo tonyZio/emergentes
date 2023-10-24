@@ -3,14 +3,25 @@ const mongoose = require('mongoose');
 const evaluacionDesempenoSchema = new mongoose.Schema({
   Empleado: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Empleado' // Referencia al modelo Empleado
+    ref: 'Empleado',
+    required: true // Hacer el campo Empleado requerido
   },
-  FechaEvaluación: Date,
-  Calificación: Number,
-  ComentariosObservaciones: String,
+  FechaEvaluacion: {
+    type: Date,
+    required: true // Hacer el campo FechaEvaluacion requerido
+  },
+  Calificacion: {
+    type: Number,
+    required: true // Hacer el campo Calificacion requerido
+  },
+  ComentariosObservaciones: {
+    type: String,
+    required: true // Hacer el campo ComentariosObservaciones requerido
+  },
   Evaluador: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Empleado' // Referencia al modelo Empleado (evaluador)
+    ref: 'Empleado',
+    required: true // Hacer el campo Evaluador requerido
   }
 });
 

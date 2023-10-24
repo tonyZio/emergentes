@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const beneficioController = require('../controllers/beneficios');
-
+const {verifyToken} = require('../middleware');
+const {validateBeneficios} = require('../middleware');
 router
     .route('/')
-    .post(beneficioController.createBeneficio)
-    .get(beneficioController.getAllBeneficios);
+    .post(verifyToken,validateBeneficios,beneficioController.createBeneficio)
+    .get(verifyToken,beneficioController.getAllBeneficios);
 
 router
     .route('/:id')
-    .get(beneficioController.getBeneficioById)
-    .put(beneficioController.updateBeneficio)
-    .delete(beneficioController.deleteBeneficio);
+    .get(verifyToken,beneficioController.getBeneficioById)
+    .put(verifyToken,validateBeneficios,beneficioController.updateBeneficio)
+    .delete(verifyToken,validateBeneficios,beneficioController.deleteBeneficio);
 
 module.exports = router;
