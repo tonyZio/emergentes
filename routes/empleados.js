@@ -1,16 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const empleadoController = require('../controllers/empleados');
+const {verifyToken} = require('../middleware');
+const {validateEmpleado} = require('../middleware');
+const catchAsync = require('../utils/catchAsync');
 
 router
     .route('/')
-    .post(empleadoController.createEmpleado)
-    .get(empleadoController.getAllEmpleados)
+    .post(verifyToken,validateEmpleado,catchAsync(empleadoController.createEmpleado))
+    .get(verifyToken,catchAsync(empleadoController.getAllEmpleados));
 
 router
     .route('/:id')
-    .get(empleadoController.getEmpleadoById)
-    .put(empleadoController.updateEmpleado)
-    .delete(empleadoController.deleteEmpleado);
+    .get(verifyToken,catchAsync(empleadoController.getEmpleadoById))
+    .put(verifyToken,validateEmpleado,catchAsync(empleadoController.updateEmpleado))
+    .delete(verifyToken,validateEmpleado,catchAsync(empleadoController.deleteEmpleado));
   
 module.exports = router;
