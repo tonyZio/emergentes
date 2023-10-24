@@ -15,7 +15,7 @@ const usuarioSchema = new mongoose.Schema({
 
 // Antes de guardar el usuario en la base de datos, hasheamos la contraseña
 usuarioSchema.pre('save', async function(next) {
-    if (!this.isModified('contraseña')) {
+    if (!this.isModified('contrasenia')) {
         return next();
     }
 

@@ -4,8 +4,11 @@ const {
   departamentoSchema, 
   empleadoSchema, 
   evaluacionDesempenoSchema, 
-  historialLaboralSchema 
+  historialLaboralSchema,
+  usuarioSchema
 } = require('./schemas');
+const ExpressError = require('./utils/expressError');
+
 
 const verifyToken = (req, res, next) => {
     const token = req.header('Authorization');
@@ -90,7 +93,16 @@ const validateHistorialLaboral = (req, res, next) => {
   }
 };
 
+const validateUsuario = (req, res, next) => {
+  const { error } = usuarioSchema.validate(req.body);
 
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400); 
+  } else {
+    next();
+  }
+};
 
 module.exports = {
   verifyToken,
@@ -98,5 +110,6 @@ module.exports = {
   validateDepartamento,
   validateEmpleado,
   validateEvaluacionDesempeno,
-  validateHistorialLaboral
+  validateHistorialLaboral,
+  validateUsuario
 }

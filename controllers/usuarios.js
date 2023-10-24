@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const bcrypt = require('bcrypt');
 const User = require('../models/Usuario'); // Importa el modelo de usuario
 const secretKey = 'secreto';
 
@@ -38,7 +38,7 @@ const login = async (req, res) => {
         res.status(401).json({ mensaje: 'Credenciales incorrectas.' });
         return;
       }
-  
+
       // Compara la contraseña ingresada con la contraseña almacenada utilizando bcrypt.compare
       const contraseniaValida = await bcrypt.compare(contrasenia, usuario.contrasenia);
       if (!contraseniaValida) {

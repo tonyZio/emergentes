@@ -3,16 +3,17 @@ const router = express.Router();
 const departamentoController = require('../controllers/departamentos');
 const {verifyToken} = require('../middleware');
 const {validateDepartamento} = require('../middleware');
+const catchAsync = require('../utils/catchAsync');
 
 router
     .route('/')
-    .post(verifyToken,departamentoController.createDepartamento)
-    .get(verifyToken,validateDepartamento,departamentoController.getAllDepartamentos);
+    .post(verifyToken,validateDepartamento,catchAsync(departamentoController.createDepartamento))
+    .get(verifyToken,catchAsync(departamentoController.getAllDepartamentos));
 
 router
     .route('/:id')
-    .get(verifyToken,departamentoController.getDepartamentoById)
-    .put(verifyToken,validateDepartamento,departamentoController.updateDepartamento)
-    .delete(verifyToken,validateDepartamento,departamentoController.deleteDepartamento);
+    .get(verifyToken,catchAsync(departamentoController.getDepartamentoById))
+    .put(verifyToken,validateDepartamento,catchAsync(departamentoController.updateDepartamento))
+    .delete(verifyToken,validateDepartamento,catchAsync(departamentoController.deleteDepartamento));
 
 module.exports = router;

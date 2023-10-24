@@ -3,15 +3,18 @@ const router = express.Router();
 const beneficioController = require('../controllers/beneficios');
 const {verifyToken} = require('../middleware');
 const {validateBeneficios} = require('../middleware');
+const catchAsync = require('../utils/catchAsync');
+
+
 router
     .route('/')
-    .post(verifyToken,validateBeneficios,beneficioController.createBeneficio)
-    .get(verifyToken,beneficioController.getAllBeneficios);
+    .post(verifyToken,validateBeneficios,catchAsync(beneficioController.createBeneficio))
+    .get(verifyToken,catchAsync(beneficioController.getAllBeneficios));
 
 router
     .route('/:id')
-    .get(verifyToken,beneficioController.getBeneficioById)
-    .put(verifyToken,validateBeneficios,beneficioController.updateBeneficio)
-    .delete(verifyToken,validateBeneficios,beneficioController.deleteBeneficio);
+    .get(verifyToken,catchAsync(beneficioController.getBeneficioById))
+    .put(verifyToken,validateBeneficios,catchAsync(beneficioController.updateBeneficio))
+    .delete(verifyToken,validateBeneficios,catchAsync(beneficioController.deleteBeneficio));
 
 module.exports = router;

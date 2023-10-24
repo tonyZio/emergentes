@@ -1,22 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const usuarioController = require('../controllers/usuarioController'); // Importa el controlador de usuarios
+const usuarioController = require('../controllers/usuarios'); // Importa el controlador de usuarios
 const { verifyToken } = require('../middleware');
-
+const catchAsync = require('../utils/catchAsync');
+const {validateUsuario} = require('../middleware')
 
 // Ruta para crear un usuario
-router.post('/usuarios', verifyToken ,usuarioController.createUsuario);
+router.post('/', verifyToken ,validateUsuario,catchAsync(usuarioController.createUsuario));
 
 // Ruta para obtener todos los usuarios
-router.get('/usuarios', verifyToken, usuarioController.getAllUsuarios);
+router.get('/', verifyToken, catchAsync(usuarioController.getAllUsuarios));
 
 // Ruta para obtener un usuario por ID
-router.get('/usuarios/:id', verifyToken, usuarioController.getUsuarioById);
+router.get('/:id', verifyToken, catchAsync(usuarioController.getUsuarioById));
 
 // Ruta para actualizar un usuario
-router.put('/usuarios/:id', verifyToken, usuarioController.updateUsuario);
+router.put('/:id', verifyToken, validateUsuario,catchAsync(usuarioController.updateUsuario));
 
 // Ruta para eliminar un usuario
-router.delete('/usuarios/:id', verifyToken, usuarioController.deleteUsuario);
+router.delete('/:id', verifyToken, validateUsuario,catchAsync(usuarioController.deleteUsuario));
 
 module.exports = router;

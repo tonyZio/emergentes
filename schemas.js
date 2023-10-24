@@ -55,10 +55,16 @@ const historialLaboralSchema = Joi.object({
   MotivoSalida: Joi.string().required(),
 });
 
+const usuarioSchema = Joi.object({
+  nombreUsuario: Joi.string().required(),
+  contrasenia: Joi.string().required()
+})
+
 module.exports = {
   beneficiosSchema,
   departamentoSchema,
   empleadoSchema,
   evaluacionDesempenoSchema,
   historialLaboralSchema,
+  usuarioSchema
 };

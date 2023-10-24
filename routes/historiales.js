@@ -3,16 +3,17 @@ const router = express.Router();
 const historialLaboralController = require('../controllers/historiales');
 const {verifyToken} = require('../middleware');
 const {validateHistorialLaboral} = require('../middleware');
+const catchAsync = require('../utils/catchAsync');
 
 router
   .route('/')
-  .post(verifyToken,historialLaboralController.createHistorialLaboral)
-  .get(verifyToken,validateHistorialLaboral,historialLaboralController.getAllHistorialesLaborales);
+  .post(verifyToken,validateHistorialLaboral, catchAsync(historialLaboralController.createHistorialLaboral))
+  .get(verifyToken,catchAsync(historialLaboralController.getAllHistorialesLaborales));
 
 router
   .route('/:id')
-  .get(verifyToken,historialLaboralController.getHistorialLaboralById)
-  .put(verifyToken,validateHistorialLaboral,historialLaboralController.updateHistorialLaboral)
-  .delete(verifyToken,validateHistorialLaboral,historialLaboralController.deleteHistorialLaboral);
+  .get(verifyToken,catchAsync(historialLaboralController.getHistorialLaboralById))
+  .put(verifyToken,validateHistorialLaboral,catchAsync(historialLaboralController.updateHistorialLaboral))
+  .delete(verifyToken,validateHistorialLaboral,catchAsync(historialLaboralController.deleteHistorialLaboral));
 
 module.exports = router;
