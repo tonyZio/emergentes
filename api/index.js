@@ -8,7 +8,7 @@ const evaluacionesRoutes =require('./routes/evaluaciones');
 const historialesRoutes =require('./routes/historiales');
 const usuariosRoutes =require('./routes/usuarios');
 const ExpressError = require('./utils/expressError');
-
+const cors = require('cors');
 
 const app = express();
 
@@ -24,6 +24,7 @@ db.once('open', () => {
 
 // Middleware para el body parser
 app.use(express.json());
+app.use(cors());
 
 // Usar las rutas
 app.use('/empleados', empleadoRoutes);
