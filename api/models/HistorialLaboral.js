@@ -11,8 +11,7 @@ const historialLaboralSchema = new mongoose.Schema({
     required: true // Hacer el campo FechaInicio requerido
   },
   FechaFinalizacion: {
-    type: Date,
-    required: true // Hacer el campo FechaFinalizacion requerido
+    type: Date
   },
   PuestoTrabajo: {
     type: String,
@@ -24,11 +23,9 @@ const historialLaboralSchema = new mongoose.Schema({
   },
   NombreEmpresaAnterior: {
     type: String,
-    required: true // Hacer el campo NombreEmpresaAnterior requerido
   },
   MotivoSalida: {
-    type: String,
-    required: true // Hacer el campo MotivoSalida requerido
+    type: String
   }
 });
 

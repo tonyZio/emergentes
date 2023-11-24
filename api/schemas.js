@@ -48,11 +48,11 @@ const evaluacionDesempenoSchema = Joi.object({
 const historialLaboralSchema = Joi.object({
   Empleado: Joi.string().required(),
   FechaInicio: Joi.date().required(),
-  FechaFinalizacion: Joi.date().required(),
+  FechaFinalizacion: Joi.date(),
   PuestoTrabajo: Joi.string().required(),
   DescripcionFunciones: Joi.string().required(),
-  NombreEmpresaAnterior: Joi.string().required(),
-  MotivoSalida: Joi.string().required(),
+  NombreEmpresaAnterior: Joi.string(),
+  MotivoSalida: Joi.string()
 });
 
 const usuarioSchema = Joi.object({
