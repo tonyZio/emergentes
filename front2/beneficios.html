@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Beneficio</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <h1>Formulario para Agregar Beneficio</h1>
+
+  <form action="" method="POST">
+    <fieldset>
+      <legend>Detalles del Beneficio</legend>
+
+      <label for="empleado">Empleado:</label>
+      <input type="text" id="empleado" name="Empleado" required><br><br>
+
+      <label for="tipoBeneficio">Tipo de Beneficio:</label>
+      <input type="text" id="tipoBeneficio" name="TipoBeneficio" required><br><br>
+
+      <label for="fechaInicio">Fecha de Inicio:</label>
+      <input type="date" id="fechaInicio" name="FechaInicio" required><br><br>
+
+      <label for="fechaFinalizacion">Fecha de Finalización:</label>
+      <input type="date" id="fechaFinalizacion" name="FechaFinalizacion" required><br><br>
+
+      <label for="detallesBeneficio">Detalles del Beneficio:</label>
+      <input type="text" id="detallesBeneficio" name="DetallesBeneficio" required><br><br>
+    </fieldset>
+
+    <div style="display: flex; justify-content: space-between;">
+      <input type="cancel" value="Atrás" >
+      <input type="submit" value="Enviar">
+    </div>
+  </form>
+</body>
+</html>

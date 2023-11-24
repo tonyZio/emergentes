@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Empleado</title>
+  <link rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+  <h1>Formulario para Agregar Empleado</h1>
+  <form action="" method="POST">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="Nombre" required><br><br>
+
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" name="Apellido" required><br><br>
+
+    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+    <input type="date" id="fechaNacimiento" name="FechaNacimiento" required><br><br>
+
+    <label>Género:</label><br>
+    <input type="checkbox" id="hombre" name="Genero" value="Hombre">
+    <label for="hombre">Hombre</label><br>
+    <input type="checkbox" id="mujer" name="Genero" value="Mujer">
+    <label for="mujer">Mujer</label><br><br>
+
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" name="Direccion" required><br><br>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="text" id="telefono" name="Telefono" required><br><br>
+
+    <label for="correo">Correo Electrónico:</label>
+    <input type="email" id="correo" name="CorreoElectronico" required><br><br>
+
+    <label for="salario">Salario:</label>
+    <input type="number" id="salario" name="Salario" required><br><br>
+
+    <label for="nombreDepartamento">Nombre del Departamento:</label>
+    <input type="text" id="nombreDepartamento" name="NombreDepartamento" required><br><br>
+
+    <label for="departamento">Departamento:</label>
+    <select id="departamento" name="Departamento" required>
+      <option value="Ventas">Ventas</option>
+      <option value="Compras">Compras</option>
+      <option value="Finanzas">Finanzas</option>
+      <option value="Almacen">Almacén</option>
+    </select><br><br>
+
+    <label for="nombreSupervisor">Nombre del Supervisor:</label>
+    <input type="text" id="nombreSupervisor" name="NombreSupervisor" required><br><br>
+
+    <label for="supervisor">Supervisor:</label>
+    <input type="text" id="supervisor" name="Supervisor" required><br><br>
+
+    <label for="puestoTrabajo">Puesto de Trabajo:</label>
+    <input type="text" id="puestoTrabajo" name="PuestoTrabajo" required><br><br>
+
+    <label for="numeroSeguroSocial">Número de Seguro Social:</label>
+    <input type="text" id="numeroSeguroSocial" name="NumeroSeguroSocial" required><br><br>
+
+    <label for="descripcionDeFunciones">Descripcion de funciones:</label>
+    <input type="text" id="descripcionDeFunciones" name="descripcionDeFunciones" required><br><br>
+
+    <label for="nombreEmpresaAnterior">Nombre de la empresa enterior:</label>
+    <input type="text" id="nombreEmpresaAnterior" name="nombreEmpresaAnterior"><br><br>
+
+    <label for="motivoSalida">Motivo de Salida:</label>
+    <input type="text" id="motivoSalida" name="motivoSalida"><br><br>
+
+    <div style="display: flex; justify-content: space-between;">
+        <input type="cancel" value="Atrás">
+        <input type="submit" value="Enviar">
+      </div>
+  </form>
+</body>
+</html>
