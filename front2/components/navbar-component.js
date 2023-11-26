@@ -1,7 +1,12 @@
 class NavbarComponent extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = `
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="home.html">Gestión empleados</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -13,10 +18,8 @@ class NavbarComponent extends HTMLElement {
                                 Empleados
                             </a>
                             <div class="dropdown-menu" aria-labelledby="entity1Dropdown">
-                                <a class="dropdown-item" href="#">Crear</a>
-                                <a class="dropdown-item" href="#">Leer</a>
-                                <a class="dropdown-item" href="#">Actualizar</a>
-                                <a class="dropdown-item" href="#">Eliminar</a>
+                                <a id="crearEmpleado" class="dropdown-item" href="#">Crear</a>
+                                <a id="leerEmpleado" class="dropdown-item" href="#">Leer</a>
                             </div>
                         </li>
                         <!-- Repite el bloque anterior para las otras entidades -->
@@ -43,18 +46,33 @@ class NavbarComponent extends HTMLElement {
                     </ul>
                 </div>
             </nav>
+
+        <script src="js/main.js"></script>
         `;
-        const logoutButton = this.querySelector('#logoutButton');
-        logoutButton.addEventListener('click', () => this.logout());
-    }
+    // const logoutButton = this.querySelector("#logoutButton");
+    //  logoutButton.addEventListener("click", () => this.logout());
 
-    logout() {
-        // Elimina algo del local storage (ajusta según tus necesidades)
-        localStorage.removeItem('jwt');
+    this.shadowRoot
+      .getElementById("crearEmpleado")
+      .addEventListener("click", () => this.redirect("crear"));
 
-        // Redirecciona a la página de inicio de sesión (ajusta según tus necesidades)
-        window.location.href = 'index.html';
-    }
+    this.shadowRoot
+      .getElementById("leerEmpleado")
+      .addEventListener("click", () => this.redirect("leer"));
+  }
+
+  redirect(option) {
+    const url = `empleado.html?opcion=${option}`;
+    window.location.href = url;
+  }
+
+  logout() {
+    // Elimina algo del local storage (ajusta según tus necesidades)
+    localStorage.removeItem("jwt");
+
+    // Redirecciona a la página de inicio de sesión (ajusta según tus necesidades)
+    window.location.href = "index.html";
+  }
 }
 
-customElements.define('navbar-component', NavbarComponent);
+customElements.define("navbar-component", NavbarComponent);

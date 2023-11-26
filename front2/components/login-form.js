@@ -61,6 +61,7 @@ class LoginForm extends HTMLElement {
         }).catch(error => {
           console.error('Error:', error);
         });
+        showHomePage();
     }
   
     // Método para mostrar la página de inicio
@@ -71,7 +72,7 @@ class LoginForm extends HTMLElement {
       // Remplaza el contenido actual del shadow DOM con el componente home-page
       this.shadowRoot.innerHTML = '';
       this.shadowRoot.appendChild(homePage); */
-      window.location.href = `home.html`;
+      window.location.href = `index.html`;
     }
   }
   
