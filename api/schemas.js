@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 // Esquema de validación para el modelo Beneficios
 const beneficiosSchema = Joi.object({
@@ -12,8 +12,8 @@ const beneficiosSchema = Joi.object({
 // Esquema de validación para el modelo Departamento
 const departamentoSchema = Joi.object({
   NombreDepartamento: Joi.string().required(),
-  DescripciónDepartamento: Joi.string().required(),
-  FechaCreación: Joi.date().required(),
+  DescripcionDepartamento: Joi.string().required(),
+  FechaCreacion: Joi.date().required(),
 });
 
 // Esquema de validación para el modelo Empleado
@@ -29,10 +29,11 @@ const empleadoSchema = Joi.object({
   Salario: Joi.number().required(),
   NombreDepartamento: Joi.string().required(),
   Departamento: Joi.string().required(),
-  NombreSupervisor: Joi.string().required(),
-  Supervisor: Joi.string().required(),
+  NombreSupervisor: Joi.string(),
+  Supervisor: Joi.string(),
   PuestoTrabajo: Joi.string().required(),
   NumeroSeguroSocial: Joi.string().required(),
+  EsSupervisor: Joi.boolean().required(),
 });
 
 // Esquema de validación para el modelo EvaluacionDesempeno
@@ -52,13 +53,13 @@ const historialLaboralSchema = Joi.object({
   PuestoTrabajo: Joi.string().required(),
   DescripcionFunciones: Joi.string().required(),
   NombreEmpresaAnterior: Joi.string(),
-  MotivoSalida: Joi.string()
+  MotivoSalida: Joi.string(),
 });
 
 const usuarioSchema = Joi.object({
   nombreUsuario: Joi.string().required(),
-  contrasenia: Joi.string().required()
-})
+  contrasenia: Joi.string().required(),
+});
 
 module.exports = {
   beneficiosSchema,
@@ -66,5 +67,5 @@ module.exports = {
   empleadoSchema,
   evaluacionDesempenoSchema,
   historialLaboralSchema,
-  usuarioSchema
+  usuarioSchema,
 };

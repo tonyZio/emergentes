@@ -1,36 +1,35 @@
-const jwt = require('jsonwebtoken');
-const { 
-  beneficiosSchema, 
-  departamentoSchema, 
-  empleadoSchema, 
-  evaluacionDesempenoSchema, 
+const jwt = require("jsonwebtoken");
+const {
+  beneficiosSchema,
+  departamentoSchema,
+  empleadoSchema,
+  evaluacionDesempenoSchema,
   historialLaboralSchema,
-  usuarioSchema
-} = require('./schemas');
-const ExpressError = require('./utils/expressError');
-
+  usuarioSchema,
+} = require("./schemas");
+const ExpressError = require("./utils/expressError");
 
 const verifyToken = (req, res, next) => {
-    const token = req.header('Authorization');
-  
-    if (!token) {
-      throw new ExpressError("Token no proporcionado",401);
-      //return res.status(401).json({ error: 'Token no proporcionado' });
-    }
-  
-    try {
-      // Verifica y decodifica el token JWT utilizando la clave secreta
-      const secretKey = process.env.SECRET_KEY || "secreto"; // Obtén la clave secreta de las variables de entorno
-      const tokenWithoutBearer = token.split(" ")[1]; // Extraer el token sin "Bearer"
-      const decoded = jwt.verify(tokenWithoutBearer, secretKey);
-  
-      // Puedes acceder a los datos del token, por ejemplo, el ID de usuario
-      req.userId = decoded.userId;
-      next();
-    } catch (error) {
-      throw new ExpressError("Token invalido",401);
-      //res.status(401).json({ error: 'Token inválido' });
-    }
+  const token = req.header("Authorization");
+
+  if (!token) {
+    throw new ExpressError("Token no proporcionado", 401);
+    //return res.status(401).json({ error: 'Token no proporcionado' });
+  }
+
+  try {
+    // Verifica y decodifica el token JWT utilizando la clave secreta
+    const secretKey = process.env.SECRET_KEY || "secreto"; // Obtén la clave secreta de las variables de entorno
+    const tokenWithoutBearer = token.split(" ")[1]; // Extraer el token sin "Bearer"
+    const decoded = jwt.verify(tokenWithoutBearer, secretKey);
+
+    // Puedes acceder a los datos del token, por ejemplo, el ID de usuario
+    req.userId = decoded.userId;
+    next();
+  } catch (error) {
+    throw new ExpressError("Token invalido", 401);
+    //res.status(401).json({ error: 'Token inválido' });
+  }
 };
 
 // Middleware de validación para Beneficios
@@ -51,7 +50,7 @@ const validateDepartamento = (req, res, next) => {
 
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400); 
+    throw new ExpressError(msg, 400);
   } else {
     next();
   }
@@ -63,7 +62,7 @@ const validateEmpleado = (req, res, next) => {
 
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400); 
+    throw new ExpressError(msg, 400);
   } else {
     next();
   }
@@ -75,7 +74,7 @@ const validateEvaluacionDesempeno = (req, res, next) => {
 
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400); 
+    throw new ExpressError(msg, 400);
   } else {
     next();
   }
@@ -87,7 +86,7 @@ const validateHistorialLaboral = (req, res, next) => {
 
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400); 
+    throw new ExpressError(msg, 400);
   } else {
     next();
   }
@@ -98,7 +97,7 @@ const validateUsuario = (req, res, next) => {
 
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400); 
+    throw new ExpressError(msg, 400);
   } else {
     next();
   }
@@ -111,5 +110,5 @@ module.exports = {
   validateEmpleado,
   validateEvaluacionDesempeno,
   validateHistorialLaboral,
-  validateUsuario
-}
+  validateUsuario,
+};

@@ -1,11 +1,10 @@
-// login-form.js
 class LoginForm extends HTMLElement {
-    constructor() {
-      super();
-  
-      this.attachShadow({ mode: 'open' });
-  
-      this.shadowRoot.innerHTML = `
+  constructor() {
+    super();
+
+    this.attachShadow({ mode: "open" });
+
+    this.shadowRoot.innerHTML = `
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <div class="container mt-5">
           <div class="row justify-content-center">
@@ -25,55 +24,54 @@ class LoginForm extends HTMLElement {
           </div>
         </div>
       `;
-  
-      // Agrega un evento al botón de inicio de sesión
-      this.shadowRoot.getElementById('loginButton').addEventListener('click', () => this.login());
-    }
-  
-    // Método para manejar la autenticación
-    async login() {
-      const nombreUsuario = this.shadowRoot.getElementById('username').value;
-      const contrasenia = this.shadowRoot.getElementById('password').value;
-  
-        const data={
-          nombreUsuario,
-          contrasenia
-        }
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        //headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
-        headers.append('Origin','http://localhost:3000');
 
-        fetch('http://localhost:3000/auth/login', {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.token) {
-            localStorage.setItem("jwt",data.token);
-            this.showHomePage()
-            return;
-          }
-          throw new Error("No autenticado");
-        }).catch(error => {
-          console.error('Error:', error);
-        });
-        showHomePage();
-    }
-  
-    // Método para mostrar la página de inicio
-    showHomePage() {
-      // Crea una instancia del componente home-page
-      /*const homePage = document.createElement('home-page');
-  
-      // Remplaza el contenido actual del shadow DOM con el componente home-page
-      this.shadowRoot.innerHTML = '';
-      this.shadowRoot.appendChild(homePage); */
-      window.location.href = `index.html`;
+    // Agrega un evento al botón de inicio de sesión
+    this.shadowRoot
+      .getElementById("loginButton")
+      .addEventListener("click", () => this.login());
+  }
+
+  // ...
+
+  async login() {
+    console.log("login");
+    const nombreUsuario = this.shadowRoot.getElementById("username").value;
+    const contrasenia = this.shadowRoot.getElementById("password").value;
+
+    const data = {
+      nombreUsuario,
+      contrasenia,
+    };
+
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Accept", "application/json");
+    headers.append("Origin", "http://localhost:3000");
+
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await response.json();
+
+      if (responseData.token) {
+        console.log(responseData.token);
+        localStorage.setItem("jwt", responseData.token);
+        window.location.href = `home.html`;
+      } else {
+        throw new Error("No autenticado");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   }
-  
-  customElements.define('login-form', LoginForm);
+
+  showHomePage() {
+    window.location.href = `home.html`;
+  }
+}
+
+customElements.define("login-form", LoginForm);

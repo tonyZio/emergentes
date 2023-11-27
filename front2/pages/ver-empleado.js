@@ -5,6 +5,7 @@ class VerEmpleado extends HTMLElement {
   }
 
   connectedCallback() {
+
     const scriptElement = document.createElement("script");
     scriptElement.src = "components/tables/Table.js";
 

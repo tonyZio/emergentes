@@ -16,6 +16,12 @@ class GestionEmpleado extends HTMLElement {
       <empleado-form option="${option}"></empleado-form>
     `;
   }
+
+
+
+
+
+
 }
 
 customElements.define("gestion-empleado", GestionEmpleado);
