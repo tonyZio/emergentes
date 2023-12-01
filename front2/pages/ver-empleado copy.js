@@ -14,22 +14,9 @@ class VerEmpleado extends HTMLElement {
     scriptElement.src = "components/tables/Table.js";
 
     document.head.appendChild(scriptElement);
-
-    const filteredEmpleados = empleados.map((empleado) => ({
-      ID: empleado._id,
-      Nombre: empleado.Nombre,
-      Apellido: empleado.Apellido,
-      Teléfono: empleado.Telefono,
-      "Correo Electrónico": empleado.CorreoElectronico,
-      "Nombre del Departamento": empleado.NombreDepartamento,
-      "Puesto de Trabajo": empleado.PuestoTrabajo,
-      "¿Es Supervisor?": empleado.EsSupervisor ? "Si" : "No",
-    }));
-
+    console.log(empleados);
     this.shadowRoot.innerHTML = `
-      <main-table entity='empleado' data='${JSON.stringify(
-        filteredEmpleados
-      )}'></main-table>
+      <main-table data=${JSON.stringify(empleados)}></main-table>
     `;
   }
 

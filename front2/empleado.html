@@ -30,7 +30,10 @@
 
           case "actualizar":
             scriptSrc = "pages/gestion-empleado.js";
-            innerHTML = `<gestion-empleado option='actualizar'></gestion-empleado>`;
+            console.log(localStorage.getItem("empleadoId"));
+            innerHTML = `<gestion-empleado option='actualizar' empleado-id=${localStorage.getItem(
+              "empleadoId"
+            )}></gestion-empleado>`;
             break;
 
           case "eliminar":

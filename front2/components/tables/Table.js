@@ -1,64 +1,117 @@
-class Table extends HTMLElement {
+class CustomTable extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
   }
 
-  static get observedAttributes() {
-    return ["data"]; // Observa el atributo 'data'
-  }
-
   connectedCallback() {
-    this.render();
+    const data = JSON.parse(this.getAttribute("data"));
+    const entity = this.getAttribute("entity");
+    this.renderTable(data, entity);
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "data" && oldValue !== newValue) {
-      this.render();
+  renderTable(data, entity) {
+    const table = document.createElement("table");
+
+    const headerRow = table.insertRow();
+    for (const key in data[0]) {
+      if (key !== "ID") {
+        const th = document.createElement("th");
+        th.textContent = key;
+        headerRow.appendChild(th);
+      }
+    }
+
+    data.forEach((item) => {
+      const row = table.insertRow();
+      for (const key in item) {
+        if (key !== "ID") {
+          const cell = row.insertCell();
+          cell.textContent = item[key];
+        }
+      }
+      const updateButton = document.createElement("button");
+      updateButton.textContent = "Actualizar";
+      updateButton.addEventListener("click", () =>
+        this.updateRow(item, entity)
+      );
+      const updateCell = row.insertCell();
+      updateCell.appendChild(updateButton);
+
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Eliminar";
+      deleteButton.addEventListener("click", () =>
+        this.deleteRow(item, entity)
+      );
+      const deleteCell = row.insertCell();
+      deleteCell.appendChild(deleteButton);
+    });
+
+    this.shadowRoot.appendChild(table);
+  }
+
+  updateRow(item, entity) {
+    switch (entity) {
+      case "empleado":
+        localStorage.setItem("empleadoId", item.ID);
+        window.location.href = `empleado.html?opcion=actualizar`;
+        break;
+
+      case "beneficios":
+        break;
+
+      case "departamento":
+        break;
+
+      case "evaluacion":
+        break;
     }
   }
 
-  render() {
-    const data = this.getAttribute("data");
+  deleteRow(item, entity) {
+    switch (entity) {
+      case "empleado":
+        const resultado = window.confirm(
+          "¿Estás seguro de que quieres eliminar al empleado?"
+        );
+        resultado ? this.deleteEmpleado(item) : "";
+        break;
 
-    if (data) {
-      const dataArray = JSON.parse(data);
+      case "beneficios":
+        break;
 
-      if (dataArray.length > 0) {
-        const table = document.createElement("table");
+      case "departamento":
+        break;
 
-        // Encabezados
-        const thead = document.createElement("thead");
-        const headerRow = document.createElement("tr");
-        dataArray[0].forEach((header) => {
-          const th = document.createElement("th");
-          th.textContent = header;
-          headerRow.appendChild(th);
-        });
-        thead.appendChild(headerRow);
-        table.appendChild(thead);
+      case "evaluacion":
+        break;
+    }
+  }
 
-        const tbody = document.createElement("tbody");
-        for (let i = 1; i < dataArray.length; i++) {
-          const row = document.createElement("tr");
-          dataArray[i].forEach((cell) => {
-            const td = document.createElement("td");
-            td.textContent = cell;
-            row.appendChild(td);
-          });
-          tbody.appendChild(row);
+  async deleteEmpleado(item) {
+    try {
+      console.log(item);
+      const response = await fetch(
+        `http://localhost:3000/empleados/${item.ID}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
+          },
+          body: JSON.stringify(item),
         }
-        table.appendChild(tbody);
+      );
 
-        this.shadowRoot.innerHTML = "";
-        this.shadowRoot.appendChild(table);
+      if (response.ok) {
+        window.alert("El empleado ha sido eliminado!");
       } else {
-        this.shadowRoot.innerHTML = "No hay datos disponibles";
+        console.error("Error al eliminar el empleado:", response.statusText);
       }
-    } else {
-      this.shadowRoot.innerHTML = 'Atributo "data" faltante';
+    } catch (error) {
+      console.error("Error en la solicitud:", error.message);
     }
   }
 }
 
-customElements.define("main-table", Table);
+customElements.define("main-table", CustomTable);

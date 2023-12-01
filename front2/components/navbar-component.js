@@ -27,13 +27,11 @@ class NavbarComponent extends HTMLElement {
                         <!-- Entidad 2 -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="entity2Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Entidad 2
+                                Beneficios
                             </a>
                             <div class="dropdown-menu" aria-labelledby="entity2Dropdown">
                                 <a class="dropdown-item" href="#">Crear</a>
                                 <a class="dropdown-item" href="#">Leer</a>
-                                <a class="dropdown-item" href="#">Actualizar</a>
-                                <a class="dropdown-item" href="#">Eliminar</a>
                             </div>
                         </li>
 

@@ -6,6 +6,7 @@ class GestionEmpleado extends HTMLElement {
 
   connectedCallback() {
     const option = this.getAttribute("option");
+    const empleadoId = this.getAttribute("empleado-id");
 
     const scriptElement = document.createElement("script");
     scriptElement.src = "components/forms/empleado-form.js";
@@ -13,15 +14,9 @@ class GestionEmpleado extends HTMLElement {
     document.head.appendChild(scriptElement);
 
     this.shadowRoot.innerHTML = `
-      <empleado-form option="${option}"></empleado-form>
+      <empleado-form option="${option}" empleado-id="${empleadoId}"></empleado-form>
     `;
   }
-
-
-
-
-
-
 }
 
 customElements.define("gestion-empleado", GestionEmpleado);
