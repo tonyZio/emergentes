@@ -14,6 +14,6 @@ router
   .route('/:id')
   .get(verifyToken,catchAsync(historialLaboralController.getHistorialLaboralById))
   .put(verifyToken,validateHistorialLaboral,catchAsync(historialLaboralController.updateHistorialLaboral))
-  .delete(verifyToken,validateHistorialLaboral,catchAsync(historialLaboralController.deleteHistorialLaboral));
+  .delete(verifyToken,catchAsync(historialLaboralController.deleteHistorialLaboral));
 
 module.exports = router;

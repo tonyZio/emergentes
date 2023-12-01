@@ -15,6 +15,6 @@ router
     .route('/:id')
     .get(verifyToken,catchAsync(beneficioController.getBeneficioById))
     .put(verifyToken,validateBeneficios,catchAsync(beneficioController.updateBeneficio))
-    .delete(verifyToken,validateBeneficios,catchAsync(beneficioController.deleteBeneficio));
+    .delete(verifyToken,catchAsync(beneficioController.deleteBeneficio));
 
 module.exports = router;

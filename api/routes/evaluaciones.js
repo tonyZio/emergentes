@@ -14,6 +14,6 @@ router
     .route('/:id')
     .get(verifyToken,catchAsync(evaluacionDesempenoController.getEvaluacionDesempenoById))
     .put(verifyToken,validateEvaluacionDesempeno,catchAsync(evaluacionDesempenoController.updateEvaluacionDesempeno))
-    .delete(verifyToken,validateEvaluacionDesempeno,catchAsync(evaluacionDesempenoController.deleteEvaluacionDesempeno));
+    .delete(verifyToken,catchAsync(evaluacionDesempenoController.deleteEvaluacionDesempeno));
 
 module.exports = router;

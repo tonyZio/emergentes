@@ -24,7 +24,6 @@ router
   )
   .delete(
     verifyToken,
-    validateEmpleado,
     catchAsync(empleadoController.deleteEmpleado)
   );
 

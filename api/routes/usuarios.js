@@ -18,6 +18,6 @@ router.get('/:id', verifyToken, catchAsync(usuarioController.getUsuarioById));
 router.put('/:id', verifyToken, validateUsuario,catchAsync(usuarioController.updateUsuario));
 
 // Ruta para eliminar un usuario
-router.delete('/:id', verifyToken, validateUsuario,catchAsync(usuarioController.deleteUsuario));
+router.delete('/:id', verifyToken, catchAsync(usuarioController.deleteUsuario));
 
 module.exports = router;

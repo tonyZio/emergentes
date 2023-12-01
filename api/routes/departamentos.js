@@ -14,6 +14,6 @@ router
     .route('/:id')
     .get(verifyToken,catchAsync(departamentoController.getDepartamentoById))
     .put(verifyToken,validateDepartamento,catchAsync(departamentoController.updateDepartamento))
-    .delete(verifyToken,validateDepartamento,catchAsync(departamentoController.deleteDepartamento));
+    .delete(verifyToken,catchAsync(departamentoController.deleteDepartamento));
 
 module.exports = router;
