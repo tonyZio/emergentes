@@ -6,6 +6,7 @@ class EmpleadoForm extends HTMLElement {
 
   async connectedCallback() {
     const option = this.getAttribute("option");
+    const empleado = {};
 
     if (option === "actualizar") {
       const empleadoId = this.getAttribute("empleado-id");
@@ -22,7 +23,7 @@ class EmpleadoForm extends HTMLElement {
       this.shadowRoot
         .querySelector("form")
         .addEventListener("submit", (event) => {
-          this.handleFormSubmit(option, event);
+          this.handleFormSubmit(option, empleado, event);
         });
     }
 
@@ -399,11 +400,24 @@ class EmpleadoForm extends HTMLElement {
         
   
         <div style="display: flex; justify-content: space-between">
-            <input type="cancel" value="Atrás" />
-            <input type="submit" value="Enviar" />
+            <input id="cancel" type="cancel" value="Atrás" />
+            <input id="submit" type="submit" value="Enviar" />
         </div>
     </form>    
     `;
+
+    this.shadowRoot
+      .getElementById("cancel")
+      .addEventListener("click", () => this.redirect("empleado.html", "leer"));
+
+    this.shadowRoot
+      .getElementById("submit")
+      .addEventListener("click", () => this.redirect("empleado.html", "leer"));
+  }
+
+  redirect(html, option) {
+    const url = `${html}?opcion=${option}`;
+    window.location.href = url;
   }
 }
 

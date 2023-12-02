@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Formulario Beneficio</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <h1>Formulario para Agregar Beneficio</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulario Beneficio</title>
 
-  <form action="" method="POST">
-    <fieldset>
-      <legend>Detalles del Beneficio</legend>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const option = urlParams.get("opcion");
 
-      <label for="empleado">Empleado:</label>
-      <input type="text" id="empleado" name="Empleado" required><br><br>
+      function loadWebComponent(option) {
+        let scriptSrc, innerHTML;
 
-      <label for="tipoBeneficio">Tipo de Beneficio:</label>
-      <input type="text" id="tipoBeneficio" name="TipoBeneficio" required><br><br>
+        switch (option) {
+          case "crear":
+            scriptSrc = "pages/gestion-beneficio.js";
+            innerHTML =
+              "<gestion-beneficio option='crear'></gestion-beneficio>";
+            break;
 
-      <label for="fechaInicio">Fecha de Inicio:</label>
-      <input type="date" id="fechaInicio" name="FechaInicio" required><br><br>
+          case "leer":
+            scriptSrc = "pages/ver-beneficio.js";
+            innerHTML = "<tabla-beneficio></tabla-beneficio>";
+            break;
 
-      <label for="fechaFinalizacion">Fecha de Finalización:</label>
-      <input type="date" id="fechaFinalizacion" name="FechaFinalizacion" required><br><br>
+          case "actualizar":
+            scriptSrc = "pages/gestion-beneficio.js";
+            innerHTML = `<gestion-beneficio option='actualizar' beneficio-id=${localStorage.getItem(
+              "beneficioId"
+            )}></gestion-beneficio>`;
+            break;
+        }
 
-      <label for="detallesBeneficio">Detalles del Beneficio:</label>
-      <input type="text" id="detallesBeneficio" name="DetallesBeneficio" required><br><br>
-    </fieldset>
+        const script = document.createElement("script");
+        script.src = scriptSrc;
 
-    <div style="display: flex; justify-content: space-between;">
-      <input type="cancel" value="Atrás" >
-      <input type="submit" value="Enviar">
-    </div>
-  </form>
-</body>
+        script.onload = function () {
+          document.body.innerHTML = innerHTML;
+        };
+
+        document.head.appendChild(script);
+      }
+
+      loadWebComponent(option);
+    </script>
+  </head>
+  <body></body>
 </html>

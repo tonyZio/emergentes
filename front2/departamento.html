@@ -1,29 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Departamento</title>
-    <link rel="stylesheet" href="css/styles.css">
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gestión de Departamento</title>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const option = urlParams.get("opcion");
+
+      function loadWebComponent(option) {
+        let scriptSrc, innerHTML;
+
+        switch (option) {
+          case "crear":
+            scriptSrc = "pages/gestion-departamento.js";
+            innerHTML =
+              "<gestion-departamento option='crear'></gestion-departamento>";
+            break;
+
+          case "leer":
+            scriptSrc = "pages/ver-departamento.js";
+            innerHTML = "<tabla-departamento></tabla-departamento>";
+            break;
+
+          case "actualizar":
+            scriptSrc = "pages/gestion-departamento.js";
+            innerHTML = `<gestion-departamento option='actualizar' departamento-id=${localStorage.getItem(
+              "departamentoId"
+            )}></gestion-departamento>`;
+            break;
+        }
+
+        const script = document.createElement("script");
+        script.src = scriptSrc;
+
+        script.onload = function () {
+          document.body.innerHTML = innerHTML;
+        };
+
+        document.head.appendChild(script);
+      }
+
+      loadWebComponent(option);
+    </script>
   </head>
-  <body>
-    <h1>Formulario Para Agregar Departamento</h1>
-  
-    <form action="" method="POST">
-      <fieldset>
-        <legend>Datos del Departamento</legend>
-  
-        <label for="nombreDepartamento">Nombre del Departamento:</label>
-        <input type="text" id="nombreDepartamento" name="NombreDepartamento" required><br><br>
-  
-        <label for="descripcionDepartamento">Descripción del Departamento:</label>
-        <input type="text" id="descripcionDepartamento" name="DescripcionDepartamento" required><br><br>
- 
-  
-      <div style="display: flex; justify-content: space-between;">
-        <input type="cancel" value="Cancelar">
-        <input type="submit" value="Agregar">
-      </div>
-    </form>
-</body>
+  <body></body>
 </html>

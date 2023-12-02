@@ -13,6 +13,8 @@ class NavbarComponent extends HTMLElement {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
+
+                        <!-- Entidad Empleados -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="entity1Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Empleados
@@ -22,18 +24,40 @@ class NavbarComponent extends HTMLElement {
                                 <a id="leerEmpleado" class="dropdown-item" href="#">Leer</a>
                             </div>
                         </li>
-                        <!-- Repite el bloque anterior para las otras entidades -->
 
-                        <!-- Entidad 2 -->
+                        <!-- Entidad Beneficios -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="entity2Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Beneficios
                             </a>
                             <div class="dropdown-menu" aria-labelledby="entity2Dropdown">
-                                <a class="dropdown-item" href="#">Crear</a>
-                                <a class="dropdown-item" href="#">Leer</a>
+                                <a id="crearBeneficio" href="#">Crear</a>
+                                <a id="leerBeneficio" href="#">Leer</a>
                             </div>
                         </li>
+
+                        <!-- Entidad Departamentos -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="entity2Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Departamentos
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="entity2Dropdown">
+                                <a id="crearDepartamento" href="#">Crear</a>
+                                <a id="leerDepartamento" href="#">Leer</a>
+                            </div>
+                        </li>
+
+                        <!-- Entidad Evaluaciones -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="entity2Dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Evaluacion
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="entity2Dropdown">
+                                <a id="crearEvaluacion" href="#">Crear</a>
+                                <a id="leerEvaluacion" href="#">Leer</a>
+                            </div>
+                        </li>
+                        
 
                         <!-- Puedes continuar agregando bloques similares para las otras entidades -->
                         <li class="nav-item">
@@ -47,20 +71,57 @@ class NavbarComponent extends HTMLElement {
 
         <script src="js/main.js"></script>
         `;
+
     // const logoutButton = this.querySelector("#logoutButton");
     //  logoutButton.addEventListener("click", () => this.logout());
 
     this.shadowRoot
       .getElementById("crearEmpleado")
-      .addEventListener("click", () => this.redirect("crear"));
+      .addEventListener("click", () => this.redirect("empleado.html", "crear"));
 
     this.shadowRoot
       .getElementById("leerEmpleado")
-      .addEventListener("click", () => this.redirect("leer"));
+      .addEventListener("click", () => this.redirect("empleado.html", "leer"));
+
+    this.shadowRoot
+      .getElementById("crearBeneficio")
+      .addEventListener("click", () =>
+        this.redirect("beneficios.html", "crear")
+      );
+
+    this.shadowRoot
+      .getElementById("leerBeneficio")
+      .addEventListener("click", () =>
+        this.redirect("beneficios.html", "leer")
+      );
+
+    this.shadowRoot
+      .getElementById("crearDepartamento")
+      .addEventListener("click", () =>
+        this.redirect("departamento.html", "crear")
+      );
+
+    this.shadowRoot
+      .getElementById("leerDepartamento")
+      .addEventListener("click", () =>
+        this.redirect("departamento.html", "leer")
+      );
+
+    this.shadowRoot
+      .getElementById("crearEvaluacion")
+      .addEventListener("click", () =>
+        this.redirect("evaluacion.html", "crear")
+      );
+
+    this.shadowRoot
+      .getElementById("leerEvaluacion")
+      .addEventListener("click", () =>
+        this.redirect("evaluacion.html", "leer")
+      );
   }
 
-  redirect(option) {
-    const url = `empleado.html?opcion=${option}`;
+  redirect(html, option) {
+    const url = `${html}?opcion=${option}`;
     window.location.href = url;
   }
 

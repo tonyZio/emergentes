@@ -11,12 +11,6 @@
       function loadWebComponent(option) {
         let scriptSrc, innerHTML;
 
-        const empleado = {
-          nombre: "Tony",
-          apellido: "Osuna",
-          direccion: "8 Enrique Segoviano",
-        };
-
         switch (option) {
           case "crear":
             scriptSrc = "pages/gestion-empleado.js";
@@ -30,15 +24,9 @@
 
           case "actualizar":
             scriptSrc = "pages/gestion-empleado.js";
-            console.log(localStorage.getItem("empleadoId"));
             innerHTML = `<gestion-empleado option='actualizar' empleado-id=${localStorage.getItem(
               "empleadoId"
             )}></gestion-empleado>`;
-            break;
-
-          case "eliminar":
-            scriptSrc = "";
-            innerHTML = "";
             break;
         }
 
